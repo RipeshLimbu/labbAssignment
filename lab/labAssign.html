@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript DOM and Array Operations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        #output {
+            margin-top: 20px;
+        }
+        button {
+            margin: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>JavaScript and DOM Interaction</h1>
+
+    <p>Enter a list of numbers separated by commas:</p>
+    <input type="text" id="numbersInput" placeholder="e.g., 1,2,3,4">
+    <button onclick="calculateSum()">Calculate Sum</button>
+
+    <div id="output"></div>
+
+    <h2>DOM Interaction</h2>
+    <button onclick="changeBackgroundColor()">Change Background Color</button>
+    <button onclick="openNewWindow()">Open New Window</button>
+    <button onclick="closeNewWindow()">Close New Window</button>
+
+    <script>
+        let newWindow = null;
+
+        function calculateSum() {
+            const input = document.getElementById('numbersInput').value;
+            const numbers = input.split(',').map(num => parseFloat(num.trim()));
+            let sum = 0;
+            numbers.forEach(num => {
+                if (!isNaN(num)) {
+                    sum += num;
+                }
+            });
+
+            const currentDate = new Date();
+            const output = document.getElementById('output');
+            output.innerHTML = `Sum: ${sum} <br> Calculated on: ${currentDate}`;
+        }
+
+    
+        function changeBackgroundColor() {
+            const colors = ['#f0f8ff', '#faebd7', '#ffe4c4', '#f5f5dc', '#dcdcdc'];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            document.body.style.backgroundColor = randomColor;
+        }
+
+        
+        function openNewWindow() {
+            if (!newWindow || newWindow.closed) {
+                newWindow = window.open('', 'newWindow', 'width=400,height=300');
+                newWindow.document.write('<p>This is a new window. You can add content here.</p>');
+            } else {
+                alert('The new window is already open.');
+            }
+        }
+
+
+        function closeNewWindow() {
+            if (newWindow && !newWindow.closed) {
+                newWindow.close();
+            } else {
+                alert('The new window is already closed.');
+            }
+        }
+    </script>
+</body>
+</html>
